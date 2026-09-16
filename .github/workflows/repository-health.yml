@@ -1,0 +1,47 @@
+name: Repository Health
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Reject generated and private files
+        shell: bash
+        run: |
+          set -euo pipefail
+          bad=$(git ls-files | grep -E '(^|/)(node_modules|dist|build|coverage|\.vite|\.idea|\.vscode)(/|$)|(^|/)\.env($|\.)|\.tsbuildinfo$|\.log$' | grep -v '^\.env\.example$' || true)
+          if [ -n "$bad" ]; then
+            echo "Unexpected generated/private files are tracked:"
+            echo "$bad"
+            exit 1
+          fi
+
+      - name: Reject known placeholder credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git grep -nEi 'localadmin|admin123|localviewer|viewer123' -- . ':!.github/workflows/repository-health.yml'; then
+            echo "Known placeholder credentials are still committed."
+            exit 1
+          fi
+
+      - name: Scan common secret patterns
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git grep -nE 'AIza[0-9A-Za-z_-]{30,}|gh[pousr]_[0-9A-Za-z_]{20,}|sk-[0-9A-Za-z_-]{20,}|-----BEGIN .*PRIVATE KEY-----' -- . ':!*.md' ':!.github/workflows/repository-health.yml'; then
+            echo "Possible credential pattern detected."
+            exit 1
+          fi
+          echo "Repository health checks passed."

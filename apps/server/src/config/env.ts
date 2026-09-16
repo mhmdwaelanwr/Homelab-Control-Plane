@@ -3,13 +3,21 @@ import path from 'node:path';
 
 const fallbackRoot = process.platform === 'win32' ? process.cwd() : '/';
 
+function requireEnv(name: string) {
+  const value = process.env[name]?.trim();
+  if (!value) {
+    throw new Error(`${name} is required`);
+  }
+  return value;
+}
+
 export const env = {
   port: Number(process.env.PORT ?? 4000),
   dashRoot: process.env.DASH_ROOT ?? fallbackRoot,
-  adminUser: process.env.ADMIN_USER ?? (() => { throw new Error('ADMIN_USER is required'); })(),
-  adminPassword: process.env.ADMIN_PASSWORD ?? (() => { throw new Error('ADMIN_PASSWORD is required'); })(),
-  viewerUser: process.env.VIEWER_USER ?? 'localviewer',
-  viewerPassword: process.env.VIEWER_PASSWORD ?? 'viewer123',
+  adminUser: requireEnv('ADMIN_USER'),
+  adminPassword: requireEnv('ADMIN_PASSWORD'),
+  viewerUser: process.env.VIEWER_USER?.trim() ?? '',
+  viewerPassword: process.env.VIEWER_PASSWORD ?? '',
   screenProvider: process.env.SCREEN_PROVIDER ?? 'novnc',
   screenEmbedUrl: process.env.SCREEN_EMBED_URL ?? 'http://localhost:6080/vnc.html',
   screenWebSocketUrl: process.env.SCREEN_WEBSOCKET_URL ?? 'ws://localhost:6080/websockify',
