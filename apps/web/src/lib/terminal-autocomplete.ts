@@ -1,0 +1,17 @@
+export const commonTerminalCommands = [
+  'ip -brief address',
+  'ip route show',
+  'ss -tulpn',
+  'netstat -tulpn',
+  'systemctl status ssh',
+  'systemctl list-units --type=service --state=running',
+  'uname -a',
+  'uptime',
+  'df -h',
+  'free -h',
+  'ps aux --sort=-%cpu | head',
+  'arp -a',
+  'ping -c 4 8.8.8.8',
+  'journalctl -n 100',
+  'ls -la',
+];
