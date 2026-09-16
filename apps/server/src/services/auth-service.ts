@@ -10,7 +10,8 @@ class AuthService {
 
   login(username: string, password: string) {
     const isAdmin = username === env.adminUser && password === env.adminPassword;
-    const isViewer = username === env.viewerUser && password === env.viewerPassword;
+    const viewerEnabled = Boolean(env.viewerUser && env.viewerPassword);
+    const isViewer = viewerEnabled && username === env.viewerUser && password === env.viewerPassword;
 
     if (!isAdmin && !isViewer) {
       activityService.push({
@@ -18,7 +19,7 @@ class AuthService {
         level: 'warning',
         message: `Failed login attempt for ${username}.`,
       });
-      throw new AppError(401, 'Invalid local admin credentials.', 'INVALID_CREDENTIALS');
+      throw new AppError(401, 'Invalid credentials.', 'INVALID_CREDENTIALS');
     }
 
     const session: AuthSession = {
@@ -75,7 +76,7 @@ class AuthService {
     activityService.push({
       source: 'auth',
       level: 'info',
-      message: `${session.username} terminated the local admin session.`,
+      message: `${session.username} terminated the local control-plane session.`,
     });
   }
 }
