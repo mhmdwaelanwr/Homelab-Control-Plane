@@ -1,4 +1,4 @@
-import { ArrowRight, Eye, EyeOff, KeyRound, Network, ServerCog, ShieldCheck, TerminalSquare, TriangleAlert } from 'lucide-react';
+import { ArrowRight, Eye, EyeOff, Network, ServerCog, ShieldCheck, TerminalSquare, TriangleAlert } from 'lucide-react';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -74,20 +74,20 @@ export function LoginPage() {
       <div className="grid w-full max-w-[1400px] gap-8 lg:grid-cols-[1.2fr,0.8fr] items-center px-4">
         <div className="glass-chrome motion-fade-up relative overflow-hidden rounded-[32px] p-10 lg:p-14 border border-white/5 shadow-[0_0_100px_rgba(var(--color-brand),0.05)]">
           <div className="absolute top-0 right-0 -mr-20 -mt-20 h-64 w-64 rounded-full bg-brand/10 blur-3xl" />
-          
+
           <div className="mb-8 relative z-10">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-brand/30 bg-brand/10 mb-6">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-brand"></span>
               </span>
-              <p className="text-xs font-bold uppercase tracking-widest text-brand">v2.0 Next-Gen OS</p>
+              <p className="text-xs font-bold uppercase tracking-widest text-brand">Local-first homelab control</p>
             </div>
             <h1 className="mt-2 font-display text-5xl font-extrabold leading-[1.1] tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white to-white/60 xl:text-7xl">
-              Homelab <br/>Dashboard
+              Homelab <br/>Control Plane
             </h1>
             <p className="mt-5 text-base leading-relaxed text-[rgb(var(--color-text-secondary))] max-w-lg">
-              منصة إدارة خوادم منزلية متكاملة. تحكم في حاويات Docker، الأوامر الطرفية، والشبكات واستهلاك الموارد من واجهة واحدة غاية في البساطة.
+              منصة محلية لإدارة ومراقبة خادم Linux المنزلي: الحاويات، الأوامر الطرفية، الشبكة، الملفات، واستهلاك الموارد من واجهة واحدة.
             </p>
           </div>
 
@@ -97,31 +97,31 @@ export function LoginPage() {
                 <TerminalSquare className="h-5 w-5" />
               </div>
               <p className="text-base font-bold text-white">التحكم الطرفي</p>
-              <p className="mt-1.5 text-xs text-slate-400">وصول مباشر لـ Shell مع Auto-complete وأوامر جاهزة</p>
+              <p className="mt-1.5 text-xs text-slate-400">وصول Shell من الواجهة مع ملفات صلاحيات مختلفة للأوامر</p>
             </div>
-            
+
             <div className="m3-surface [--state-layer-color:rgb(var(--color-brand))] rounded-[20px] border border-white/5 bg-white/[0.02] p-5 backdrop-blur-md transition-all hover:bg-white/[0.04]">
               <div className="h-10 w-10 flex items-center justify-center rounded-[12px] bg-indigo-500/10 text-indigo-400 mb-4">
                 <ServerCog className="h-5 w-5" />
               </div>
-              <p className="text-base font-bold text-white">إدارة الحاويات (Docker)</p>
-              <p className="mt-1.5 text-xs text-slate-400">App Store متكامل لتشغيل وإدارة الخدمات بكبسة زر</p>
+              <p className="text-base font-bold text-white">إدارة Docker</p>
+              <p className="mt-1.5 text-xs text-slate-400">عرض الحاويات وتشغيلها وإيقافها وإعادة تشغيلها ومتابعة حالتها</p>
             </div>
-            
+
             <div className="m3-surface [--state-layer-color:rgb(var(--color-brand))] rounded-[20px] border border-white/5 bg-white/[0.02] p-5 backdrop-blur-md transition-all hover:bg-white/[0.04]">
               <div className="h-10 w-10 flex items-center justify-center rounded-[12px] bg-emerald-500/10 text-emerald-400 mb-4">
                 <Network className="h-5 w-5" />
               </div>
-              <p className="text-base font-bold text-white">شبكة احترافية</p>
-              <p className="mt-1.5 text-xs text-slate-400">اكتشاف الأجهزة المتصلة بخوارزميات ARP & Topology</p>
+              <p className="text-base font-bold text-white">مراقبة الشبكة</p>
+              <p className="mt-1.5 text-xs text-slate-400">عرض معلومات المضيف والواجهات والأجهزة والخدمات المرتبطة بالهوم لاب</p>
             </div>
-            
+
             <div className="m3-surface [--state-layer-color:rgb(var(--color-brand))] rounded-[20px] border border-white/5 bg-white/[0.02] p-5 backdrop-blur-md transition-all hover:bg-white/[0.04]">
               <div className="h-10 w-10 flex items-center justify-center rounded-[12px] bg-rose-500/10 text-rose-400 mb-4">
                 <ShieldCheck className="h-5 w-5" />
               </div>
-              <p className="text-base font-bold text-white">ترسانة حماية</p>
-              <p className="mt-1.5 text-xs text-slate-400">صلاحيات دقيقة (RBAC) وسجل تدقيق (Audit Log) للزوار</p>
+              <p className="text-base font-bold text-white">وصول محمي</p>
+              <p className="mt-1.5 text-xs text-slate-400">جلسات محلية بأدوار Admin وViewer مع سجل نشاط للعمليات الحساسة</p>
             </div>
           </div>
         </div>
@@ -180,41 +180,7 @@ export function LoginPage() {
               {loading ? t('login.authenticating') : t('login.enter_dashboard')}
               {!loading ? <ArrowRight className={`ml-2 h-5 w-5 ${dir === 'rtl' ? 'rotate-180' : ''}`} /> : null}
             </Button>
-            
-            <div className="relative flex py-2 items-center">
-              <div className="flex-grow border-t border-white/10"></div>
-              <span className="flex-shrink-0 px-4 text-xs text-slate-500 uppercase tracking-wider">or fast connect</span>
-              <div className="flex-grow border-t border-white/10"></div>
-            </div>
 
-            <div className="grid grid-cols-2 gap-3 pb-2">
-              <Button
-                type="button"
-                variant="secondary"
-                className="w-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 hover:bg-indigo-500/20 shadow-[0_0_15px_rgba(99,102,241,0.1)] transition-colors"
-                onClick={() => {
-                  setUsername('');
-                  setPassword('');
-                  setFormError(null);
-                }}
-                disabled={loading}
-              >
-                👨‍💻 Admin Demo
-              </Button>
-              <Button
-                type="button"
-                variant="secondary"
-                className="w-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.1)] transition-colors"
-                onClick={() => {
-                  setUsername('viewer');
-                  setPassword('viewer123');
-                  setFormError(null);
-                }}
-                disabled={loading}
-              >
-                👁️ Viewer Demo
-              </Button>
-            </div>
             {formError ? <p className="text-sm text-danger">{formError}</p> : null}
           </form>
 
